@@ -1,0 +1,31 @@
+tap "homebrew/cask"
+
+# 'brew tap' with custom Git URL
+# tap "user/tap-repo", "https://user@bitbucket.org/user/homebrew-tap-repo.git"
+
+brew "go"
+brew "golangci-lint"
+
+brew "ffmpeg"
+brew "fzf"
+
+brew "node"
+brew "lua"
+brew "mycli"
+brew "neofetch"
+brew "neovim"
+brew "ranger"
+brew "ripgrep"
+brew "tldr"
+brew "tmux"
+brew "unar"
+brew "wget"
+brew "yadm"
+brew "yarn"
+
+cask "wechat"
+cask "google-chrome"
+
+{% if yadm.os == "Darwin" %}
+cask "hammerspoon"
+{% endif %}
