@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 install_neovim() {
 {% if yadm.distro_family == "debian" %}
