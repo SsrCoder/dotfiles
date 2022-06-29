@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # install homebrew if it's missing
 if ! command -v brew >/dev/null 2>&1; then
