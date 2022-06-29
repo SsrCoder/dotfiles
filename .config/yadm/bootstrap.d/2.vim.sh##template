@@ -1,15 +1,13 @@
 #!/bin/sh
 
 install_neovim() {
-	{% if yadm.distro_family == 'debian' %}
+	{% if yadm.distro_family == "debian" %}
 	if ! command -v nvim >/dev/null 2>&1; then
 		echo "Installing nvim"
 		sudo add-apt-repository ppa:neovim-ppa/unstable
 		sudo apt-get update
 		sudo apt-get install -y neovim
 	fi
-	{% else if yadm.os == 'Darwin' %}
-	# do not need install here, it has installed by homebrew
 	{% endif %}
 }
 
