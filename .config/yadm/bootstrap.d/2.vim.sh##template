@@ -2,11 +2,20 @@
 
 install_neovim() {
 {% if yadm.distro_family == "debian" %}
-	if ! command -v nvim >/dev/null 2>&1; then
-		echo "Installing nvim"
-		sudo add-apt-repository ppa:neovim-ppa/unstable
-		sudo apt-get update
-		sudo apt-get install -y neovim
+	if [[ "$(whoami)" == "root" ]]; then
+		if ! command -v nvim >/dev/null 2>&1; then
+			echo "Installing nvim"
+			add-apt-repository ppa:neovim-ppa/unstable
+			apt-get update
+			apt-get install -y neovim
+		fi
+	else
+		if ! command -v nvim >/dev/null 2>&1; then
+			echo "Installing nvim"
+			sudo add-apt-repository ppa:neovim-ppa/unstable
+			sudo apt-get update
+			sudo apt-get install -y neovim
+		fi
 	fi
 {% endif %}
 {% if yadm.os == "Darwin" %}
@@ -15,10 +24,10 @@ install_neovim() {
 }
 
 config_neovim() {
-	if [[ "grep -rn 'packer.startup' $XDG_CONFIG_HOME/nvim" != "" ]]; then
+	if [[ "$(grep -rn 'packer.startup' $XDG_CONFIG_HOME/nvim)" != "" ]]; then
 		echo "Bootstrapping nvim plugins with packer"
 		nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-	elif [[ "grep -rn 'call plug#begin' $XDG_CONFIG_HOME/nvim" != "" ]]; then
+	elif [[ "$(grep -rn 'call plug#begin' $XDG_CONFIG_HOME/nvim)" != "" ]]; then
 		echo "Bootstrapping nvim plugins with plug"
 		nvim --headless -c 'PlugInstall --sync' -c 'qa'
 	fi
