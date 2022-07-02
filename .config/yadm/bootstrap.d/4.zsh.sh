@@ -17,7 +17,7 @@ if ! command -v zsh >/dev/null 2>&1; then
 fi
 
 if ! command -v omz >/dev/null 2>&1; then
-	export ZSH="$XDG_CONFIG_HOME/zsh/oh-my-zsh"
+	export ZSH="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/oh-my-zsh"
 	sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" -y
 fi
 
