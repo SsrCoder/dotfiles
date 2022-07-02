@@ -24,13 +24,13 @@ install_neovim() {
 }
 
 config_neovim() {
-	if [[ "$(grep -rn 'packer.startup' $XDG_CONFIG_HOME/nvim)" != "" ]]; then
+	if [[ "$(grep -rn 'packer.startup' ${XDG_CONFIG_HOME:-$HOME/.config}/nvim)" != "" ]]; then
 		echo "Bootstrapping nvim plugins with packer"
 		# try three times
 		nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 		nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 		nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-	elif [[ "$(grep -rn 'call plug#begin' $XDG_CONFIG_HOME/nvim)" != "" ]]; then
+	elif [[ "$(grep -rn 'call plug#begin' ${XDG_CONFIG_HOME:-$HOME/.config}/nvim)" != "" ]]; then
 		echo "Bootstrapping nvim plugins with plug"
 		nvim --headless -c 'PlugInstall --sync' -c 'qa'
 	fi

@@ -23,5 +23,3 @@ fi
 
 rm -rf $HOME/.zshrc # delete it, and use mine
 ln -s $HOME/.config/zsh/zshrc $HOME/.zshrc
-
-source $HOME/.zshrc
